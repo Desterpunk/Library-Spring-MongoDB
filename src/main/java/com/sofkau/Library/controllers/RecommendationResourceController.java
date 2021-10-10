@@ -18,9 +18,19 @@ public class RecommendationResourceController {
     RecommendationResourceService recommendationResourceService;
 
     @GetMapping("/recommendation/type/{type}")
-    public ResponseEntity<ResourceDTO> loanResource (@PathVariable("type") String type) {
+    public ResponseEntity<ResourceDTO> recommendResourcesByType (@PathVariable("type") String type) {
         try {
             return new ResponseEntity(recommendationResourceService.recommendResourcesByType(type), HttpStatus.OK);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/recommendation/area/{area}")
+    public ResponseEntity<ResourceDTO> recommendResourcesByArea (@PathVariable("area") String area) {
+        try {
+            return new ResponseEntity(recommendationResourceService.recommendResourcesByArea(area), HttpStatus.OK);
         } catch (Exception e){
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.NOT_FOUND);
