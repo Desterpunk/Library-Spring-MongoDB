@@ -3,8 +3,8 @@ package com.sofkau.Library.dtos;
 import java.time.LocalDate;
 
 public class StatusDTO {
-    private String Status;
-    private Boolean avaible;
+    private String status;
+    private Boolean available;
     private LocalDate date;
 
     public StatusDTO() {
@@ -12,19 +12,19 @@ public class StatusDTO {
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
-    public Boolean getAvaible() {
-        return avaible;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setAvaible(Boolean avaible) {
-        this.avaible = avaible;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public LocalDate getDate() {

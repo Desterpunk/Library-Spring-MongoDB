@@ -20,13 +20,13 @@ public class AvailabilityResourceService {
 
         Resource resource = resourceRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no resource with that ID"));
         if (resource.getAvaible()){
-            statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " is avaible");
-            statusDTO.setAvaible(true);
+            statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " is available");
+            statusDTO.setAvailable(true);
             statusDTO.setDate(null);
             return statusDTO;
         }
-        statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " is not avaible");
-        statusDTO.setAvaible(false);
+        statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " is not available, Actual date: " + resourceMapper.fromCollection(resource).getDate());
+        statusDTO.setAvailable(false);
         statusDTO.setDate(resourceMapper.fromCollection(resource).getDate());
         return statusDTO;
     }
