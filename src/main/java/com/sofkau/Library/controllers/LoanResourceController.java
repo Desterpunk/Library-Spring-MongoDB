@@ -18,7 +18,20 @@ public class LoanResourceController {
     LoanResourceService loanResourceService;
 
     @GetMapping("/loan/{id}")
-    public ResponseEntity<StatusDTO> loan (@PathVariable("id") String id) {
-        return new ResponseEntity<>(loanResourceService.loanResource(id), HttpStatus.OK);
+    public ResponseEntity<StatusDTO> loanResource (@PathVariable("id") String id) {
+        try {
+            return new ResponseEntity<>(loanResourceService.loanResource(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/return/{id}")
+    public ResponseEntity<StatusDTO> returnResource (@PathVariable("id") String id) {
+        try {
+            return new ResponseEntity<>(loanResourceService.returnResource(id), HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

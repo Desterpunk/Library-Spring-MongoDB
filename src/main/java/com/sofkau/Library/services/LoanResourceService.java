@@ -30,8 +30,27 @@ public class LoanResourceService {
             statusDTO.setDate(resourceMapper.fromCollection(resource).getDate());
             return statusDTO;
         }
-        statusDTO.setStatus("There is no resource with that ID");
-        statusDTO.setAvailable(false);
+        statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " is not available");
+        statusDTO.setAvailable(resourceMapper.fromCollection(resource).getAvaible());
+        statusDTO.setDate(resourceMapper.fromCollection(resource).getDate());
+        return statusDTO;
+    }
+
+    public StatusDTO returnResource(String id){
+        StatusDTO statusDTO = new StatusDTO();
+
+        Resource resource = resourceRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no resource with that ID"));
+        if (!resource.getAvaible()){
+            resource.setAvaible(true);
+            resource.setDate(LocalDate.now());
+            resourceRepository.save(resource);
+            statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " was successfully returned");
+            statusDTO.setAvailable(resourceMapper.fromCollection(resource).getAvaible());
+            statusDTO.setDate(resourceMapper.fromCollection(resource).getDate());
+            return statusDTO;
+        }
+        statusDTO.setStatus(resourceMapper.fromCollection(resource).getName() + " is actually returned");
+        statusDTO.setAvailable(true);
         statusDTO.setDate(resourceMapper.fromCollection(resource).getDate());
         return statusDTO;
     }
