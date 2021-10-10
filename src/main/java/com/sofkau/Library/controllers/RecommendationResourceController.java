@@ -36,4 +36,14 @@ public class RecommendationResourceController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/recommendation/{type}/{area}")
+    public ResponseEntity<ResourceDTO> recommendResourcesByArea (@PathVariable("type") String type, @PathVariable("area") String area) {
+        try {
+            return new ResponseEntity(recommendationResourceService.recommendResourcesByTypeAndArea(type, area), HttpStatus.OK);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
 }

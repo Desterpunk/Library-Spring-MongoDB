@@ -25,4 +25,9 @@ public class RecommendationResourceService {
         List<Resource> resources = resourceRepository.findResourcesByArea(area).orElseThrow(() -> new RuntimeException("There is no resource with that area"));
         return resourceMapper.fromCollectionList(resources);
     }
+
+    public List<ResourceDTO> recommendResourcesByTypeAndArea(String type, String area){
+        List<Resource> resources = resourceRepository.findResourcesByTypeAndArea(type,area).orElseThrow(() -> new RuntimeException("There is no resource with that type and area"));
+        return resourceMapper.fromCollectionList(resources);
+    }
 }

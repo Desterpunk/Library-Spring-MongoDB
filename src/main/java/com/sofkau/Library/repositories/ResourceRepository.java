@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ResourceRepository extends MongoRepository<Resource,String> {
     Optional<List<Resource>> findResourcesByType(String type);
     Optional<List<Resource>> findResourcesByArea(String area);
+    Optional<List<Resource>> findResourcesByTypeAndArea(String type, String area);
 }
