@@ -1,6 +1,7 @@
 package com.sofkau.Library.dtos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class StatusDTO {
     private String status;
@@ -33,5 +34,18 @@ public class StatusDTO {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StatusDTO statusDTO = (StatusDTO) o;
+        return Objects.equals(status, statusDTO.status) && Objects.equals(available, statusDTO.available) && Objects.equals(date, statusDTO.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(status, available, date);
     }
 }

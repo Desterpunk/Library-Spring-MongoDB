@@ -1,6 +1,7 @@
 package com.sofkau.Library.dtos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ResourceDTO {
     private String id;
@@ -12,6 +13,23 @@ public class ResourceDTO {
 
     public ResourceDTO() {
 
+    }
+
+    public ResourceDTO(String name, String type, String area, LocalDate date, Boolean avaible) {
+        this.name = name;
+        this.type = type;
+        this.area = area;
+        this.date = date;
+        this.avaible = avaible;
+    }
+
+    public ResourceDTO(String id, String name, String type, String area, LocalDate date, Boolean avaible) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.area = area;
+        this.date = date;
+        this.avaible = avaible;
     }
 
     public String getId() {
@@ -60,5 +78,18 @@ public class ResourceDTO {
 
     public void setAvaible(Boolean avaible) {
         this.avaible = avaible;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResourceDTO that = (ResourceDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(type, that.type) && Objects.equals(area, that.area) && Objects.equals(date, that.date) && Objects.equals(avaible, that.avaible);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, area, date, avaible);
     }
 }
