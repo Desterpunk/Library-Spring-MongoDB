@@ -1,27 +1,28 @@
 package com.sofkau.Library.usecases;
 
-import com.sofkau.Library.dtos.StatusDTO;
-import com.sofkau.Library.mappers.StatusMapper;
+import com.sofkau.Library.mappers.ResourceMapper;
 import com.sofkau.Library.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.function.Function;
-
 @Service
 public class AvailabilityResourceUseCase implements AvailabilityResource {
     private final ResourceRepository resourceRepository;
-    private final StatusMapper statusMapper;
+    private final ResourceMapper resourceMapper;
 
     @Autowired
-    public AvailabilityResourceUseCase(ResourceRepository resourceRepository, StatusMapper statusMapper) {
+    public AvailabilityResourceUseCase(ResourceRepository resourceRepository, ResourceMapper resourceMapper) {
         this.resourceRepository = resourceRepository;
-        this.statusMapper = statusMapper;
+        this.resourceMapper = resourceMapper;
     }
 
     @Override
-    public Mono<StatusDTO> apply(String id) {
-        return resourceRepository.findById(id).map(statusMapper.mapperToStatus());
+    public Mono<String> apply(String id) {
+        return resourceRepository.findById(id).map(
+                resource -> resource.getAvaible() ?
+                        String.valueOf(resource.getName() + " is available") :
+                        String.valueOf(resource.getName() +" is not available" + " last date " + resource.getDate())
+        );
     }
 }

@@ -1,9 +1,8 @@
 package com.sofkau.Library.usecases;
 
-import com.sofkau.Library.dtos.ResourceDTO;
 import reactor.core.publisher.Mono;
 
 @FunctionalInterface
-public interface AvailabilityResource {
+public interface ReturnResource {
     public Mono<String> apply(String id);
 }
